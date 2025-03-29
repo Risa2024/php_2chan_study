@@ -1,72 +1,72 @@
-body{
-    background-color: #dcc0a6;
+body {
+  background-color: #dcc0a6;
 }
 
-.title{
-    text-align: center;
-    font-size: 34px;
+.title {
+  text-align: center;
+  font-size: 34px;
 }
 
-.threadWrapper{
-    background-color: #f3eded;
-    padding: 10px;
-    max-width: 1300px;
-    margin: 0 auto;
-    border: 1px solid black;
-    margin-bottom: 20px;
+.threadWrapper {
+  background-color: #f3eded;
+  padding: 10px;
+  max-width: 1300px;
+  margin: 0 auto;
+  border: 1px solid black;
+  margin-bottom: 20px;
 }
 
-.childWrapper{
-   border: 1px solid black;
-   padding: 10px;
+.childWrapper {
+  border: 1px solid black;
+  padding: 10px;
 }
 
-.threadTitle{
-    display:flex;
-    align-items: center;
-    font-weight: 600;
-    margin-left: 6px;
-    height: 60px;
+.threadTitle {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  margin-left: 6px;
+  height: 60px;
 }
-.threadTitle h1{
-    color: red;
-    margin-left: 3px;
-    font-size: 27px;
-}
-
-section{
-    padding:0 10px;
+.threadTitle h1 {
+  color: red;
+  margin-left: 3px;
+  font-size: 27px;
 }
 
-.nameArea{
-    display: flex;
-    align-items: center;
-    margin-bottom: -14px;
+section {
+  padding: 0 10px;
+}
+
+.nameArea {
+  display: flex;
+  align-items: center;
+  margin-bottom: -14px;
 }
 
 section .username {
-    color: green;
-    font-weight: 700;
+  color: green;
+  font-weight: 700;
 }
 
-
-section .comment{
-    margin-left: 10px;
+section .comment {
+  margin-left: 10px;
 }
 
-section .comment{
-    margin-top: 0;
-    margin-left: 20px;
+section .comment {
+  margin-top: 0;
+  margin-left: 20px;
 }
 
-.formWrapper{
+/* フォームのスタイルを修正 */
+.formWrapper {
     padding: 16px;
     margin-left: 20px;
-}
+  }
 
-.commentTextArea{
-    margin-top: 10px;
-    width: 500%;
-    height: 90px;
-    /*resize: none;*/
+.commentTextArea {
+  width: 300px;
+  height: 90px;
+  display: block;
+  margin-top: 10px;
 }

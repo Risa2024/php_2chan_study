@@ -2,15 +2,48 @@
 <?php
 //$title = '2ちゃんねる掲示板';
 //print_r($title);
+include_once 'app/database/connect.php';
+
+$error_message = array();
 
 if(isset($_POST['submitButton'])){
-    $username = $_POST['username'];
-    var_dump($username);
+    //名前入力チェック
+    if(empty($_POST['username'])){
+        $error_message['username'] = '名前を入力してください。';
+    }
+    //コメント入力チェック
+    if(empty($_POST['body'])){
+        $error_message['body'] = 'コメントを入力してください。';
+    }
+
+    if(empty($error_message)){
+        $post_date = date('Y-m-d H:i:s');
+
+        $sql = "INSERT INTO comment (username, body, post_date) VALUES (:username, :body, :post_date)";
+        $statement = $pdo->prepare($sql);
+        //値をセットする
+        $statement->bindParam(':username', $_POST['username'],PDO::PARAM_STR);
+        $statement->bindParam(':body', $_POST['body'],PDO::PARAM_STR);
+        $statement->bindParam(':post_date', $post_date, PDO::PARAM_STR);
+        $statement->execute();
+    }
 }
+
 if(isset($_POST['body'])){
     $body = $_POST['body'];
     var_dump($body);
 }
+
+$comment_array = array();
+
+//コメントデータをテーブルから取得
+$sql = "SELECT * FROM comment";  // comments → comment に修正
+$statement = $pdo->prepare($sql);
+$statement->execute();
+
+$comment_array = $statement;
+
+//var_dump($comment_array->fetchAll());  // 取得したデータを確認
 
 ?>
 
@@ -28,6 +61,11 @@ if(isset($_POST['body'])){
         <h1 class="title">2ちゃんねる掲示板</h1>
         <hr>
     </header>
+    <!-- バリデーションチェック -->
+     <?php if(isset($error_message)): ?>
+
+    <?php endif; ?>
+
 
     <!-- スレッドエリア -->
     <div class="threadWrapper">
@@ -38,16 +76,18 @@ if(isset($_POST['body'])){
 
         </div>
         <section>
+            <?php foreach($comment_array as $comment): ?>
             <article class><!--記事-->
                 <div class="Wrapper">
                     <div class="nameArea">
                         <span>名前：</span>
-                        <p class="username">名無しさん</p>
-                        <time>：2022/7/16 14:20</time>
+                        <p class="username"><?php echo $comment["username"]; ?></p>
+                        <time>：<?php echo $comment["post_date"]; ?></time>
                     </div>
-                    <p class="comment">手書きのコメントです。</p>
+                    <p class="comment"><?php echo $comment['body']; ?></p>
                 </div>
             </article>
+           <?php endforeach; ?>
         </section>
         <form class="formWrapper" method="POST">
             <div>
@@ -59,6 +99,7 @@ if(isset($_POST['body'])){
                 <textarea class="commentTextArea" name="body"></textarea>
             </div>
         </form>
-    </div>
+        </div><!-- childWrapperの終了タグ -->
+    </div><!-- threadWrapperの終了タグ -->
 </body>
 </html>
