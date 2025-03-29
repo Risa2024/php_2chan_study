@@ -70,3 +70,6 @@ section .comment {
   display: block;
   margin-top: 10px;
 }
+.errorMessage {
+  color: red;
+}
